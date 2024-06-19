@@ -9,28 +9,27 @@ namespace Sort_Opdracht
         {
             Console.WriteLine("How many numbers to generate:");
             int count;
-            string input = Console.ReadLine();
-            if (!int.TryParse(input, out count))
-            {
-                count = 10;
-            }
+            string? input = Console.ReadLine();
+            if (!int.TryParse(input, out count)) count = 10;
+
+
             //List<int> nrList = getRandomNumbers(-99, 99, count);
-            //List<int> nrList = new List<int>([10, 9, 8, 7, 6, 5, 4, 3, 2, 1]);
             Console.WriteLine("\n\nSorting...\n");
 
-            //TODO test hoe lang deze erover doen met stopwatch
 
+            // test each sorting algorithm x times and print time taken
             Stopwatch stopWatch = new Stopwatch();
-            int testAmount = 50;
-            
+            int testAmount = 100;
+
             ////////////////////////////////////////////////////////////////////////////////////////
             for (int i = 0; i < testAmount; i++)
             {
                 List<int> nrList = getRandomNumbers(-99, 99, count);
+                ShiftHighestSort shiftHighestSort = new ShiftHighestSort();
 
                 stopWatch.Start();
-                ShiftHighestSort shiftHighestSort = new ShiftHighestSort();
-                List<int> shiftSorted = shiftHighestSort.Sort(nrList);
+                //List<int> shiftSorted = 
+                shiftHighestSort.Sort(nrList);
                 stopWatch.Stop();
             }
 
@@ -44,10 +43,11 @@ namespace Sort_Opdracht
             for (int i = 0; i < testAmount; i++)
             {
                 List<int> nrList = getRandomNumbers(-99, 99, count);
+                KeepListSorted keepListSorted = new KeepListSorted();
 
                 stopWatch.Start();
-                KeepListSorted keepListSorted = new KeepListSorted();
-                List<int> keepSorted = keepListSorted.Sort(nrList);
+                //List<int> keepSorted = 
+                keepListSorted.Sort(nrList);
                 stopWatch.Stop();
             }
 
@@ -61,10 +61,11 @@ namespace Sort_Opdracht
             for (int i = 0; i < testAmount; i++)
             {
                 List<int> nrList = getRandomNumbers(-99, 99, count);
+                RotateSort rotateSort = new RotateSort();
 
                 stopWatch.Start();
-                RotateSort rotateSort = new RotateSort();
-                List<int> rotateSorted = rotateSort.Sort(nrList);
+                //List<int> rotateSorted = 
+                rotateSort.Sort(nrList);
                 stopWatch.Stop();
             }
 
@@ -108,7 +109,6 @@ namespace Sort_Opdracht
                 Console.WriteLine(list[i]);
                 if (i >= 200) break; // cap print at 200 values
             }
-
         }
     }
 }
