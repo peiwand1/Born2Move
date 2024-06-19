@@ -29,17 +29,22 @@ namespace Sort_opdracht
             array = Partitioning(array.GetRange(start, end - start));
         }
 
+        // recursive function for sorting
         private List<int> Partitioning(List<int> partition)
         {
-            if (partition.Count <= 1) return partition; // do nothing if list is 1 element or smaller
+            // immediately return if list is 1 element or smaller
+            // this stops further recursion when it doesn't serve a purpose
+            if (partition.Count <= 1) return partition;
 
+            // create 2 lists, 1 for values smaller than pivot, one for values bigger or equal to pivot
             List<int> prePivot = new List<int>();
             List<int> postPivot = new List<int>();
-            int pivotVal = rnd.Next(0, partition.Count);
+            int pivotVal = rnd.Next(0, partition.Count); // choose a random number as pivot
 
+            // loop over list and put each value in either prePivot or postPivot
             for (int i = 0; i < partition.Count; i++)
             {
-                if (i == pivotVal) continue; // don't compare pivot to self
+                if (i == pivotVal) continue; // don't do anything with pivot itself
 
                 if (partition[i] < partition[pivotVal])
                 {
@@ -52,6 +57,10 @@ namespace Sort_opdracht
                     postPivot.Add(partition[i]);
                 }
             }
+
+            // create a new list where values smaller than pivot are to the left
+            // and values bigger are to the right
+            // recursively call this function on both prePivot and postPivot so they get fully sorted
             List<int> tmp = new List<int>(Partitioning(prePivot));
             tmp.Add(partition[pivotVal]); // add pivot between pre and post
             tmp.AddRange(Partitioning(postPivot));
