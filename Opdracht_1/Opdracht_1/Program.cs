@@ -1,4 +1,5 @@
 ﻿using Sort_opdracht;
+using System.Diagnostics;
 
 namespace Sort_Opdracht
 {
@@ -13,29 +14,68 @@ namespace Sort_Opdracht
             {
                 count = 10;
             }
-            List<int> nrList = getRandomNumbers(-99, 99, count);
+            //List<int> nrList = getRandomNumbers(-99, 99, count);
             //List<int> nrList = new List<int>([10, 9, 8, 7, 6, 5, 4, 3, 2, 1]);
             Console.WriteLine("\n\nSorting...\n");
 
             //TODO test hoe lang deze erover doen met stopwatch
 
-            //ShiftHighestSort shiftHighestSort = new ShiftHighestSort();
-            //nrList = shiftHighestSort.Sort(nrList);
-
-            //KeepListSorted keepListSorted = new KeepListSorted();
-            //nrList = keepListSorted.Sort(nrList);
-
-            RotateSort rotateSort = new RotateSort();
-            nrList = rotateSort.Sort(nrList);
-
-            for (int i = 0; i < nrList.Count; i++)
+            Stopwatch stopWatch = new Stopwatch();
+            int testAmount = 50;
+            
+            ////////////////////////////////////////////////////////////////////////////////////////
+            for (int i = 0; i < testAmount; i++)
             {
-                Console.WriteLine(nrList[i]);
-                if (i >= 200) break;
+                List<int> nrList = getRandomNumbers(-99, 99, count);
+
+                stopWatch.Start();
+                ShiftHighestSort shiftHighestSort = new ShiftHighestSort();
+                List<int> shiftSorted = shiftHighestSort.Sort(nrList);
+                stopWatch.Stop();
             }
 
-            Console.WriteLine(validateSort(nrList, count) ? "sort successful" : "sort unsuccessful");
+            Console.WriteLine("ShiftHighestSort:");
+            Console.WriteLine("Runtime " + stopWatch.Elapsed.TotalMilliseconds + " ms");
+            Console.WriteLine("Avg " + stopWatch.Elapsed.TotalMilliseconds / testAmount + " ms");
+            Console.WriteLine();
+            stopWatch.Reset();
 
+            ////////////////////////////////////////////////////////////////////////////////////////
+            for (int i = 0; i < testAmount; i++)
+            {
+                List<int> nrList = getRandomNumbers(-99, 99, count);
+
+                stopWatch.Start();
+                KeepListSorted keepListSorted = new KeepListSorted();
+                List<int> keepSorted = keepListSorted.Sort(nrList);
+                stopWatch.Stop();
+            }
+
+            Console.WriteLine("KeepListSorted:");
+            Console.WriteLine("Runtime " + stopWatch.Elapsed.TotalMilliseconds + " ms");
+            Console.WriteLine("Avg " + stopWatch.Elapsed.TotalMilliseconds / testAmount + " ms");
+            Console.WriteLine();
+            stopWatch.Reset();
+
+            ////////////////////////////////////////////////////////////////////////////////////////
+            for (int i = 0; i < testAmount; i++)
+            {
+                List<int> nrList = getRandomNumbers(-99, 99, count);
+
+                stopWatch.Start();
+                RotateSort rotateSort = new RotateSort();
+                List<int> rotateSorted = rotateSort.Sort(nrList);
+                stopWatch.Stop();
+            }
+
+            Console.WriteLine("RotateSort:");
+            Console.WriteLine("Runtime " + stopWatch.Elapsed.TotalMilliseconds + " ms");
+            Console.WriteLine("Avg " + stopWatch.Elapsed.TotalMilliseconds / testAmount + " ms");
+            Console.WriteLine();
+            stopWatch.Reset();
+
+            //printList(rotateSorted);
+            //Console.WriteLine(validateSort(rotateSorted, count) ? "sort successful" : "sort unsuccessful");
         }
 
         static private List<int> getRandomNumbers(int lowerBound, int upperBound, int amount)
@@ -45,7 +85,7 @@ namespace Sort_Opdracht
             for (int i = 0; i < amount; i++)
             {
                 nrList.Add(rnd.Next(lowerBound, upperBound + 1));
-                Console.WriteLine(nrList[i]);
+                //Console.WriteLine(nrList[i]);
             }
             return nrList;
         }
@@ -59,6 +99,16 @@ namespace Sort_Opdracht
                 if (nrList[i] > nrList[i + 1]) return false;
             }
             return true;
+        }
+
+        static private void printList(List<int> list)
+        {
+            for (int i = 0; i < list.Count; i++)
+            {
+                Console.WriteLine(list[i]);
+                if (i >= 200) break; // cap print at 200 values
+            }
+
         }
     }
 }
