@@ -7,11 +7,11 @@ namespace Sort_Opdracht
     {
         static void Main(string[] args)
         {
+            // user input for how big the random number list should be, default to 10
             Console.WriteLine("How many numbers to generate:");
             int count;
             string? input = Console.ReadLine();
             if (!int.TryParse(input, out count)) count = 10;
-
 
             //List<int> nrList = getRandomNumbers(-99, 99, count);
             Console.WriteLine("\n\nSorting...\n");
@@ -20,21 +20,23 @@ namespace Sort_Opdracht
             // test each sorting algorithm x times and print time taken
             Stopwatch stopWatch = new Stopwatch();
             int testAmount = 100;
+            ShiftHighestSort shiftHighestSort = new ShiftHighestSort();
+            KeepListSorted keepListSorted = new KeepListSorted();
+            RotateSort rotateSort = new RotateSort();
 
             ////////////////////////////////////////////////////////////////////////////////////////
             for (int i = 0; i < testAmount; i++)
             {
-                List<int> nrList = getRandomNumbers(-99, 99, count);
-                ShiftHighestSort shiftHighestSort = new ShiftHighestSort();
+                List<int> nrList = getRandomNumbers(-99, 99, count); // generate a new random list each time
 
-                stopWatch.Start();
+                stopWatch.Start(); // only time the sort function
                 //List<int> shiftSorted = 
                 shiftHighestSort.Sort(nrList);
                 stopWatch.Stop();
             }
 
             Console.WriteLine("ShiftHighestSort:");
-            Console.WriteLine("Runtime " + stopWatch.Elapsed.TotalMilliseconds + " ms");
+            Console.WriteLine("Runtime " + stopWatch.Elapsed.TotalMilliseconds + " ms for " + testAmount + " sorts");
             Console.WriteLine("Avg " + stopWatch.Elapsed.TotalMilliseconds / testAmount + " ms");
             Console.WriteLine();
             stopWatch.Reset();
@@ -43,7 +45,6 @@ namespace Sort_Opdracht
             for (int i = 0; i < testAmount; i++)
             {
                 List<int> nrList = getRandomNumbers(-99, 99, count);
-                KeepListSorted keepListSorted = new KeepListSorted();
 
                 stopWatch.Start();
                 //List<int> keepSorted = 
@@ -52,7 +53,7 @@ namespace Sort_Opdracht
             }
 
             Console.WriteLine("KeepListSorted:");
-            Console.WriteLine("Runtime " + stopWatch.Elapsed.TotalMilliseconds + " ms");
+            Console.WriteLine("Runtime " + stopWatch.Elapsed.TotalMilliseconds + " ms for " + testAmount + " sorts");
             Console.WriteLine("Avg " + stopWatch.Elapsed.TotalMilliseconds / testAmount + " ms");
             Console.WriteLine();
             stopWatch.Reset();
@@ -61,7 +62,6 @@ namespace Sort_Opdracht
             for (int i = 0; i < testAmount; i++)
             {
                 List<int> nrList = getRandomNumbers(-99, 99, count);
-                RotateSort rotateSort = new RotateSort();
 
                 stopWatch.Start();
                 //List<int> rotateSorted = 
@@ -70,13 +70,13 @@ namespace Sort_Opdracht
             }
 
             Console.WriteLine("RotateSort:");
-            Console.WriteLine("Runtime " + stopWatch.Elapsed.TotalMilliseconds + " ms");
+            Console.WriteLine("Runtime " + stopWatch.Elapsed.TotalMilliseconds + " ms for " + testAmount + " sorts");
             Console.WriteLine("Avg " + stopWatch.Elapsed.TotalMilliseconds / testAmount + " ms");
             Console.WriteLine();
             stopWatch.Reset();
 
             //printList(rotateSorted);
-            //Console.WriteLine(validateSort(rotateSorted, count) ? "sort successful" : "sort unsuccessful");
+            //Console.WriteLine(validateSort(nrList, count) ? "sort successful" : "sort unsuccessful");
         }
 
         static private List<int> getRandomNumbers(int lowerBound, int upperBound, int amount)
