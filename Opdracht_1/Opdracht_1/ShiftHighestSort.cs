@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-namespace Sort_opdracht
+﻿namespace Sort_opdracht
 {
     internal class ShiftHighestSort
     {

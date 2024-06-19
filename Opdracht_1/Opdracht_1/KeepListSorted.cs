@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Sort_opdracht
+﻿namespace Sort_opdracht
 {
     internal class KeepListSorted
     {
