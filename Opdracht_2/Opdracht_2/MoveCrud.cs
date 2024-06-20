@@ -1,22 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.SqlClient;
 
 namespace BornToMove
 {
-    internal class MoveCrud
+    public sealed class MoveCrud
     {
+        private static MoveCrud? _instance = null;
         SqlConnection sqlCon;
 
-        public MoveCrud(string connectionString)
+        private MoveCrud()
         {
-            sqlCon = new SqlConnection(connectionString);
+            sqlCon = new SqlConnection("server=(localdb)\\ProjectModels;database=born2move;");
         }
 
-        public List<Move> selectExercises()
+        public static MoveCrud GetInstance()
+        {
+            if (_instance == null)
+            {
+                _instance = new MoveCrud();
+            }
+            return _instance;
+        }
+
+        public List<Move> SelectExercises()
         {
             string queryStatement = "SELECT * " +
                                     "FROM dbo.move " +
@@ -41,10 +46,10 @@ namespace BornToMove
             return result;
         }
 
-        public void insert(Move move)
+        public void Insert(Move move)
         {
             string queryStatement = "INSERT INTO dbo.move VALUES " +
-                                    "(" + move.name + ", " + move.description + ", " + move.sweatRate + ")";
+                                    "('" + move.name + "', '" + move.description + "', '" + move.sweatRate + "')";
 
             SqlCommand command = new SqlCommand(queryStatement, sqlCon);
             sqlCon.Open();

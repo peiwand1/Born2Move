@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BornToMove
+﻿namespace BornToMove
 {
-    internal class Move
+    public class Move
     {
         public int id { get; set; }
         public string name { get; set; }
@@ -20,15 +14,5 @@ namespace BornToMove
             description = aDescription;
             sweatRate = aSweatRate;
         }
-
-        //public string toShortString()
-        //{
-        //    return id.ToString() + ") " + name;
-        //}
-
-        //public string toString()
-        //{
-        //    return id.ToString() + ") " + name + " " + description + "" + sweatRate; 
-        //}
     }
 }
