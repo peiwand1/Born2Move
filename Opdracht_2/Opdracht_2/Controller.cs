@@ -6,38 +6,50 @@ using System.Threading.Tasks;
 
 namespace BornToMove
 {
+    // Lets you swap between using db id column and a newly generated id based on position in list
+    // Good for when rows have been deleted and there are gaps in the ids
+    enum IdMode
+    {
+        useListIndex,
+        useDBIndex
+    }
+
     internal class Controller
     {
         private List<Move> moves;
+        private IdMode idMode;
 
         public Controller()
         {
             moves = MoveCrud.GetInstance().SelectExercises();
+            idMode = IdMode.useListIndex;
         }
 
         public void RunProgram()
         {
             if (UserWantsChoice())
             {
-                ShowMoves(moves);
+                Console.Clear();
+                ShowMoves(moves, idMode);
 
                 Console.WriteLine("\nWhich will you choose?");
                 int id = 0;
                 string? ageInput = Console.ReadLine();
                 if (!int.TryParse(ageInput, out id)) id = 1;
 
+                Console.Clear();
                 if (id == 0)
                 {
                     AddNewMove();
                 }
                 else
                 {
-                    Console.WriteLine();
-                    ShowMove(FindMove(moves, id));
+                    ShowMove(FindMove(moves, id, idMode));
                 }
             }
             else
             {
+                Console.Clear();
                 Random rand = new Random();
                 ShowMove(moves[rand.Next(0, moves.Count)]);
             }
@@ -51,17 +63,36 @@ namespace BornToMove
             return string.Equals(input, "y", StringComparison.OrdinalIgnoreCase);
         }
 
-        public void ShowMoves(List<Move> moves)
+        public void ShowMoves(List<Move> moves, IdMode mode)
         {
-            Console.WriteLine("ID  | " + "Name".PadRight(20, ' ') + "| Sweat rating");
-            foreach (Move move in moves)
+            Console.WriteLine("#   | " + "Name".PadRight(20, ' ') + "| Sweat rating");
+
+            switch (mode)
             {
-                Console.WriteLine((move.id.ToString() + ")").PadRight(4, ' ') + "| "
-                                    + move.name.PadRight(20, ' ') + "| "
-                                    //+ move.description + " "
-                                    + move.sweatRate
-                                    );
+                case IdMode.useListIndex:
+                    int i = 1;
+                    foreach (Move move in moves)
+                    {
+                        Console.WriteLine((i.ToString() + ")").PadRight(4, ' ') + "| "
+                                            + move.name.PadRight(20, ' ') + "| "
+                                            //+ move.description + " "
+                                            + move.sweatRate
+                                            );
+                        i++;
+                    }
+                    break;
+                case IdMode.useDBIndex:
+                    foreach (Move move in moves)
+                    {
+                        Console.WriteLine((move.id.ToString() + ")").PadRight(4, ' ') + "| "
+                                            + move.name.PadRight(20, ' ') + "| "
+                                            //+ move.description + " "
+                                            + move.sweatRate
+                                            );
+                    }
+                    break;
             }
+
         }
 
         public void ShowMove(Move move)
@@ -72,13 +103,26 @@ namespace BornToMove
                             );
         }
 
-        public static Move FindMove(List<Move> moves, int idToMatch)
+        public static Move FindMove(List<Move> moves, int idToMatch, IdMode mode)
         {
             if (moves.Count == 0) return new Move(1, "Stand", "Just stand up from your desk for a bit", 1);
 
-            foreach (Move move in moves)
+            switch (mode)
             {
-                if (move.id == idToMatch) return move;
+                case IdMode.useListIndex:
+                    int i = 1;
+                    foreach (Move move in moves)
+                    {
+                        if (i == idToMatch) return move;
+                        i++;
+                    }
+                    break;
+                case IdMode.useDBIndex:
+                    foreach (Move move in moves)
+                    {
+                        if (move.id == idToMatch) return move;
+                    }
+                    break;
             }
 
             Console.WriteLine("Could not find move with that ID, try this instead:");
