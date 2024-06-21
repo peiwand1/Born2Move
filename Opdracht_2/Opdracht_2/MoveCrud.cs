@@ -21,6 +21,9 @@ namespace BornToMove
             return _instance;
         }
 
+        /**
+         * returns move table from db as List of Move objects
+         */
         public List<Move> SelectExercises()
         {
             string queryStatement = "SELECT * " +
@@ -46,6 +49,9 @@ namespace BornToMove
             return result;
         }
 
+        /**
+         * adds new move to move table
+         */
         public void Insert(Move move)
         {
             string queryStatement = "INSERT INTO dbo.move VALUES " +

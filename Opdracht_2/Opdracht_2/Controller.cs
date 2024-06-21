@@ -32,12 +32,9 @@ namespace BornToMove
                 Console.Clear();
                 ShowMoves(moves, idMode);
 
-                Console.WriteLine("\nWhich will you choose?");
-                int id = 0;
-                string? ageInput = Console.ReadLine();
-                if (!int.TryParse(ageInput, out id)) id = 1;
-
+                int id = ChooseMove();
                 Console.Clear();
+
                 if (id == 0)
                 {
                     AddNewMove();
@@ -55,6 +52,10 @@ namespace BornToMove
             }
         }
 
+        /**
+         * asks user if they want to choose an excersice on their own
+         * y and Y are considered a yes, other input is considered a no
+         */
         private bool UserWantsChoice()
         {
             Console.WriteLine("Get schmoving!");
@@ -63,6 +64,22 @@ namespace BornToMove
             return string.Equals(input, "y", StringComparison.OrdinalIgnoreCase);
         }
 
+        /**
+         * asks the user to choose a move by id
+         */
+        private int ChooseMove()
+        {
+            Console.WriteLine("\nWhich will you choose? Enter 0 to add a new move");
+            int id = 0;
+            string? ageInput = Console.ReadLine();
+            if (!int.TryParse(ageInput, out id)) id = 1;
+            return id;
+        }
+
+        /**
+         * lists all moves in list
+         * depending on IdMode it lists them with the objects ids or their List index
+         */
         public void ShowMoves(List<Move> moves, IdMode mode)
         {
             Console.WriteLine("#   | " + "Name".PadRight(20, ' ') + "| Sweat rating");
@@ -95,6 +112,9 @@ namespace BornToMove
 
         }
 
+        /**
+         * print Move data in console
+         */
         public void ShowMove(Move move)
         {
             Console.WriteLine(move.name + '\n'
@@ -103,7 +123,11 @@ namespace BornToMove
                             );
         }
 
-        public static Move FindMove(List<Move> moves, int idToMatch, IdMode mode)
+        /**
+         * finds a Move from the given list
+         * depending on IdMode it searches through the Move object's ids or their List index
+         */
+        public Move FindMove(List<Move> moves, int idToMatch, IdMode mode)
         {
             if (moves.Count == 0) return new Move(1, "Stand", "Just stand up from your desk for a bit", 1);
 
@@ -129,7 +153,10 @@ namespace BornToMove
             return moves[0];
         }
 
-        public static void AddNewMove()
+        /**
+         * prompts user to add a new move to the database
+         */
+        public void AddNewMove()
         {
             Console.WriteLine("Let's add a new move!");
 
