@@ -1,14 +1,17 @@
-﻿namespace BornToMove
+﻿using BornToMove.Business;
+using BornToMove.DAL;
+
+namespace BornToMove
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Controller controller = new Controller();
+            MoveCrud moveCrud = new MoveCrud(new MoveContext());
+            BuMove businessMove = new BuMove(moveCrud);
 
+            Controller controller = new Controller(businessMove);
             controller.RunProgram();
-            // TODO Pas het BornToMove project aan zodat het raadplegen van en wegschrijven naar de database voortaan via BornToMove.Business loopt.
-
         }
     }
 }

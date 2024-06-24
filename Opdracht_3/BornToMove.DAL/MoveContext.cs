@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using BornToMove;
 
 namespace BornToMove.DAL
 {
@@ -12,7 +11,5 @@ namespace BornToMove.DAL
             builder.UseSqlServer("server=(localdb)\\ProjectModels;database=born2move;Trusted_Connection=true;TrustServerCertificate=true;");
             base.OnConfiguring(builder);
         }
-
-
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BornToMove.Business;
+using BornToMove.DAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,17 +18,18 @@ namespace BornToMove
 
     internal class Controller
     {
-        private List<Move> moves;
+        private BuMove buMove;
         private IdMode idMode;
 
-        public Controller()
+        public Controller(BuMove aBuMove)
         {
-            moves = MoveCrud.GetInstance().SelectExercises();
+            buMove = aBuMove;
             idMode = IdMode.useListIndex;
         }
 
         public void RunProgram()
         {
+            List<Move> moves = buMove.getMoves();
             if (UserWantsChoice())
             {
                 Console.Clear();
@@ -93,7 +96,7 @@ namespace BornToMove
                         Console.WriteLine((i.ToString() + ")").PadRight(4, ' ') + "| "
                                             + move.name.PadRight(20, ' ') + "| "
                                             //+ move.description + " "
-                                            + move.sweatRate
+                                            + move.sweatrate
                                             );
                         i++;
                     }
@@ -104,7 +107,7 @@ namespace BornToMove
                         Console.WriteLine((move.id.ToString() + ")").PadRight(4, ' ') + "| "
                                             + move.name.PadRight(20, ' ') + "| "
                                             //+ move.description + " "
-                                            + move.sweatRate
+                                            + move.sweatrate
                                             );
                     }
                     break;
@@ -119,7 +122,7 @@ namespace BornToMove
         {
             Console.WriteLine(move.name + '\n'
                             + move.description + '\n'
-                            + "Sweat rate: " + move.sweatRate
+                            + "Sweat rate: " + move.sweatrate
                             );
         }
 
@@ -174,8 +177,12 @@ namespace BornToMove
             if (name != null && description != null && sweatrate >= 1 && sweatrate <= 10)
             {
                 Move newMove = new Move(0, name, description, sweatrate);
-                MoveCrud.GetInstance().Insert(newMove);
+                buMove.addMove(newMove);
                 Console.WriteLine("New move has been added");
+            }
+            else
+            {
+                Console.WriteLine("Move was not added, please check input");
             }
         }
     }

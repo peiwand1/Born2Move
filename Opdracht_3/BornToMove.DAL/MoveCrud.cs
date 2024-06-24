@@ -1,32 +1,47 @@
-﻿using System.Data.SqlClient;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Collections;
+using System.Data.SqlClient;
 
 namespace BornToMove.DAL
 {
     public class MoveCrud
     {
-        public void create(Move move)
-        {
+        MoveContext context;
 
+        public MoveCrud(MoveContext aContext)
+        {
+            context = aContext;
         }
 
-        public void update(Move updatedMove)
+        public void create(Move move)
         {
+            context.Move.Add(move);
+            context.SaveChanges();
+        }
 
+        public void update(Move move)
+        {
+            context.Move.Update(move);
+            context.SaveChanges();
         }
 
         public void delete(int id)
         {
-
+            context.Move.Remove(readMoveById(id));
+            context.SaveChanges();
         }
 
-        public void readMoveById(int id)
+        public Move readMoveById(int id)
         {
-
+            IQueryable<Move> result = context.Move.Where(m => m.id == id);
+            if (result.Count() > 0) return result.First();
+            
+            return new Move(1, "404", "Move could not be found", 1);
         }
 
-        public void readAllMoves()
+        public DbSet<Move> readAllMoves()
         {
-
+            return context.Move;
         }
     }
 }

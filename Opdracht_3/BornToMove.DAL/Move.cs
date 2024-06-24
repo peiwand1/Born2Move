@@ -5,14 +5,14 @@
         public int id { get; set; }
         public string name { get; set; }
         public string description { get; set; }
-        public int sweatRate { get; set; }
+        public int sweatrate { get; set; }
 
-        public Move(int anId, string aName,  string aDescription, int aSweatRate) 
+        public Move(int id, string name,  string description, int sweatrate) 
         {
-            id = anId;
-            name = aName;
-            description = aDescription;
-            sweatRate = aSweatRate;
+            this.id = id;
+            this.name = name;
+            this.description = description;
+            this.sweatrate = sweatrate;
         }
     }
 }
