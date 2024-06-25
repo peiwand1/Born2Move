@@ -7,8 +7,10 @@ namespace BornToMove
     {
         static void Main(string[] args)
         {
-            MoveCrud moveCrud = new MoveCrud(new MoveContext());
-            BuMove businessMove = new BuMove(moveCrud);
+            MoveContext context = new MoveContext();
+            MoveCrud moveCrud = new MoveCrud(context);
+            MoveRatingCrud moveRatingCrud = new MoveRatingCrud(context);
+            BuMove businessMove = new BuMove(moveCrud, moveRatingCrud);
 
             Controller controller = new Controller(businessMove);
             controller.RunProgram();

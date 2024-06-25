@@ -6,7 +6,7 @@ namespace BornToMove.DAL
     public class MoveContext : DbContext
     {
         public DbSet<Move> Move { get; set; }
-        //public DbSet<MoveRating> MoveRating { get; set; }
+        public DbSet<MoveRating> MoveRating { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {

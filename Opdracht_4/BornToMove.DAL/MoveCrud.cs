@@ -37,15 +37,21 @@ namespace BornToMove.DAL
 
         public Move readMoveById(int id)
         {
-            IQueryable<Move> result = context.Move.Where(m => m.id == id);
+            //IQueryable<Move> result = context.Move.Where(m => m.id == id);
+            IQueryable<Move> result = from m in context.Move
+                                      where m.id == id
+                                      select m;
+
             if (result.Count() > 0) return result.First();
 
             return new Move(1, "404", "Move could not be found", 1);
         }
 
-        public DbSet<Move> readAllMoves()
+        public List<Move> readAllMoves()
         {
-            return context.Move;
+            //return context.Move.ToList();
+            return (from m in context.Move
+                    select m).ToList();
         }
     }
 }

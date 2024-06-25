@@ -47,6 +47,7 @@ namespace BornToMove
                 else
                 {
                     ShowMove(FindMove(moves, id, idMode));
+                    GiveRating();
                 }
             }
             else
@@ -54,6 +55,8 @@ namespace BornToMove
                 Console.Clear();
                 Random rand = new Random();
                 ShowMove(moves[rand.Next(0, moves.Count)]);
+                GiveRating();
+
             }
         }
 
@@ -124,7 +127,8 @@ namespace BornToMove
         {
             Console.WriteLine(move.name + '\n'
                             + move.description + '\n'
-                            + "Sweat rate: " + move.sweatrate
+                            + "Sweat rate: " + move.sweatrate + '\n'
+                            + "Rating: " + buMove.getAvgMoveRating(move.id)
                             );
         }
 
@@ -186,6 +190,18 @@ namespace BornToMove
             {
                 Console.WriteLine("Move was not added, please check input");
             }
+        }
+
+        private void GiveRating()
+        {
+            Console.WriteLine();
+            Console.WriteLine("Done? How about giving a rating: (Between 1 and 10)");
+            int rating = 0;
+            string? ageInput = Console.ReadLine();
+            if (!int.TryParse(ageInput, out rating)) return;
+            if (rating > 10 || rating < 1) return;
+
+            // TODO write rating to DB
         }
     }
 }
