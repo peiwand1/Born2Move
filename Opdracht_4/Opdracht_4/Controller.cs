@@ -25,6 +25,8 @@ namespace BornToMove
         {
             buMove = aBuMove;
             idMode = IdMode.useListIndex;
+
+            buMove.populateDB(); // adds some moves if the db is empty
         }
 
         public void RunProgram()

@@ -27,15 +27,19 @@ namespace BornToMove.DAL
 
         public void delete(int id)
         {
-            context.Move.Remove(readMoveById(id));
-            context.SaveChanges();
+            Move? move = readMoveById(id);
+            if (move != null)
+            {
+                context.Move.Remove(move);
+                context.SaveChanges();
+            }
         }
 
         public Move readMoveById(int id)
         {
             IQueryable<Move> result = context.Move.Where(m => m.id == id);
             if (result.Count() > 0) return result.First();
-            
+
             return new Move(1, "404", "Move could not be found", 1);
         }
 
