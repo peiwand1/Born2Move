@@ -1,9 +1,8 @@
 ﻿namespace Sort_opdracht
 {
-    public class RotateSort<T>
+    public class RotateSort<T> where T : IComparable<T>
     {
         private List<T> array;
-        private IComparer<T> comparer;
         Random rnd;
 
         public RotateSort()
@@ -11,10 +10,9 @@
             array = new List<T>();
             rnd = new Random();
         }
-        public List<T> Sort(List<T> input, IComparer<T> comparer)
+        public List<T> Sort(List<T> input)
         {
             this.array = new List<T>(input);
-            this.comparer = comparer;
             SortFunction(0, array.Count);
             return this.array;
         }
@@ -38,7 +36,7 @@
             {
                 if (i == pivotIndex) continue; // don't do anything with pivot itself
 
-                if (comparer.Compare(partition[i], partition[pivotIndex]) == -1)
+                if (partition[i] < partition[pivotIndex])
                 {
                     // move left
                     prePivot.Add(partition[i]);
