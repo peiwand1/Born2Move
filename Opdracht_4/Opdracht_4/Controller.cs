@@ -46,16 +46,18 @@ namespace BornToMove
                 }
                 else
                 {
-                    ShowMove(FindMove(moves, id, idMode));
-                    GiveRating();
+                    Move m = FindMove(moves, id, idMode);
+                    ShowMove(m);
+                    GiveRating(m);
                 }
             }
             else
             {
                 Console.Clear();
                 Random rand = new Random();
-                ShowMove(moves[rand.Next(0, moves.Count)]);
-                GiveRating();
+                Move m = moves[rand.Next(0, moves.Count)];
+                ShowMove(m);
+                GiveRating(m);
 
             }
         }
@@ -125,10 +127,11 @@ namespace BornToMove
          */
         public void ShowMove(Move move)
         {
+            double? avgRating = buMove.getAvgMoveRating(move.id);
             Console.WriteLine(move.name + '\n'
                             + move.description + '\n'
                             + "Sweat rate: " + move.sweatrate + '\n'
-                            + "Rating: " + buMove.getAvgMoveRating(move.id)
+                            + "Rating: " + (avgRating != null ? avgRating : "N/A")
                             );
         }
 
@@ -192,7 +195,7 @@ namespace BornToMove
             }
         }
 
-        private void GiveRating()
+        private void GiveRating(Move move)
         {
             Console.WriteLine();
             Console.WriteLine("Done? How about giving a rating: (Between 1 and 10)");
@@ -201,7 +204,13 @@ namespace BornToMove
             if (!int.TryParse(ageInput, out rating)) return;
             if (rating > 10 || rating < 1) return;
 
-            // TODO write rating to DB
+            MoveRating mr = new MoveRating();
+            mr.move = move;
+            mr.rating = rating;
+            mr.intensity = 1;
+            buMove.addMoveRating(mr);
+
+            Console.WriteLine("Added rating.");
         }
     }
 }

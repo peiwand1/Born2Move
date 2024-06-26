@@ -31,10 +31,17 @@ namespace BornToMove.DAL
             context.SaveChanges();
         }
 
-        public double readAvgMoveRatingByMoveId(int id)
+        public double? readAvgMoveRatingByMoveId(int id)
         {
-            return context.MoveRating.Where(r => r.move.id == id)
-                .Average(r => r.rating);
+            try
+            {
+                return context.MoveRating.Where(r => r.move.id == id)
+                                         .Average(r => r.rating);
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public MoveRating readMoveRating(int id)

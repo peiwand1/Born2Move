@@ -30,7 +30,7 @@ namespace BornToMove.Business
             return moveCrud.readMoveById(id);
         }
 
-        public double getAvgMoveRating(int id)
+        public double? getAvgMoveRating(int id)
         {
             return moveRatingCrud.readAvgMoveRatingByMoveId(id);
         }
