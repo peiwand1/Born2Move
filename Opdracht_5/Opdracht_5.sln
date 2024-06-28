@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BornToMove.DAL", "BornToMov
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BornToMove.Business", "BornToMove.Business\BornToMove.Business.csproj", "{51FC5AE6-14AA-413F-A54A-7D25E52E51FD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BornToMove.OrganizerTest", "BornToMove.OrganizerTest\BornToMove.OrganizerTest.csproj", "{662C97EF-F4C0-49C9-93BE-EEC48A12E961}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{51FC5AE6-14AA-413F-A54A-7D25E52E51FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51FC5AE6-14AA-413F-A54A-7D25E52E51FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{51FC5AE6-14AA-413F-A54A-7D25E52E51FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{662C97EF-F4C0-49C9-93BE-EEC48A12E961}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{662C97EF-F4C0-49C9-93BE-EEC48A12E961}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{662C97EF-F4C0-49C9-93BE-EEC48A12E961}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{662C97EF-F4C0-49C9-93BE-EEC48A12E961}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
