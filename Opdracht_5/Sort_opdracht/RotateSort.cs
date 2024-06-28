@@ -36,7 +36,7 @@
             {
                 if (i == pivotIndex) continue; // don't do anything with pivot itself
 
-                if (partition[i] < partition[pivotIndex])
+                if (partition[i].CompareTo(partition[pivotIndex]) == -1)
                 {
                     // move left
                     prePivot.Add(partition[i]);
