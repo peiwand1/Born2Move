@@ -1,5 +1,6 @@
 ﻿using BornToMove.Business;
 using BornToMove.DAL;
+using Sort_opdracht;
 
 namespace BornToMove
 {
@@ -13,15 +14,18 @@ namespace BornToMove
 
     internal class Controller
     {
+        private RotateSort<Move> sorter;
+        private IComparer<Move> comparer;
         private BuMove buMove;
         private IdMode idMode;
 
-        public Controller(BuMove aBuMove)
+        public Controller(BuMove aBuMove, MoveContext context)
         {
+            sorter = new RotateSort<Move>();
             buMove = aBuMove;
             idMode = IdMode.useListIndex;
-
-            buMove.populateDB(); // adds some moves if the db is empty
+            comparer = new MoveComparer(context);
+            buMove.populateDB(); // adds some moves (if the db is empty)
         }
 
         public void RunProgram()
@@ -29,6 +33,9 @@ namespace BornToMove
             List<Move> moves = buMove.getMoves();
             if (UserWantsChoice())
             {
+                moves = sorter.Sort(moves, comparer);
+                moves.Reverse();
+
                 Console.Clear();
                 ShowMoves(moves, idMode);
 
@@ -87,7 +94,7 @@ namespace BornToMove
          */
         public void ShowMoves(List<Move> moves, IdMode mode)
         {
-            Console.WriteLine("#   | " + "Name".PadRight(20, ' ') + "| Sweat rating");
+            Console.WriteLine("#   | " + "Name".PadRight(20, ' ') + "| Sweat rating | Avg rating");
 
             switch (mode)
             {
@@ -98,7 +105,8 @@ namespace BornToMove
                         Console.WriteLine((i.ToString() + ")").PadRight(4, ' ') + "| "
                                             + move.name.PadRight(20, ' ') + "| "
                                             //+ move.description + " "
-                                            + move.sweatrate
+                                            + move.sweatrate.ToString().PadRight(13, ' ') + "| "
+                                            + buMove.getAvgMoveRating(move.id)
                                             );
                         i++;
                     }
@@ -109,7 +117,8 @@ namespace BornToMove
                         Console.WriteLine((move.id.ToString() + ")").PadRight(4, ' ') + "| "
                                             + move.name.PadRight(20, ' ') + "| "
                                             //+ move.description + " "
-                                            + move.sweatrate
+                                            + move.sweatrate.ToString().PadRight(13, ' ') + "| "
+                                            + buMove.getAvgMoveRating(move.id)
                                             );
                     }
                     break;

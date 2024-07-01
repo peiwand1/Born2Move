@@ -61,16 +61,17 @@ namespace BornToMove.Business
                 addMove(move2);
                 addMove(move3);
 
-                MoveRating r = new MoveRating();
-                r.move = move1;
-                r.rating = 1;
-                r.intensity = 1;
+                MoveRating r1 = new MoveRating();
+                r1.move = move1;
+                r1.rating = 7;
+                r1.intensity = 1;
+                addMoveRating(r1);
 
-                addMoveRating(r);
-
-                r.rating = 4;
-                addMoveRating(r);
-
+                MoveRating r2 = new MoveRating();
+                r2.move = move1;
+                r2.rating = 9;
+                r2.intensity = 1;
+                addMoveRating(r2);
             }
         }
     }

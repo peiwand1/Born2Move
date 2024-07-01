@@ -19,4 +19,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BornToMove.Business\BornToMove.Business.csproj" />
+    <ProjectReference Include="..\BornToMove.DAL\BornToMove.DAL.csproj" />
+  </ItemGroup>
+
 </Project>

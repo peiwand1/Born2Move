@@ -8,13 +8,18 @@ namespace BornToMove
     {
         static void Main(string[] args)
         {
-            //MoveContext context = new MoveContext();
-            //MoveCrud moveCrud = new MoveCrud(context);
-            //MoveRatingCrud moveRatingCrud = new MoveRatingCrud(context);
-            //BuMove businessMove = new BuMove(moveCrud, moveRatingCrud);
+            MoveContext context = new MoveContext();
+            MoveCrud moveCrud = new MoveCrud(context);
+            MoveRatingCrud moveRatingCrud = new MoveRatingCrud(context);
+            BuMove businessMove = new BuMove(moveCrud, moveRatingCrud);
 
-            //Controller controller = new Controller(businessMove);
-            //controller.RunProgram();
+            Controller controller = new Controller(businessMove, context);
+
+            while (true)
+            {
+                controller.RunProgram();
+                Console.Clear();
+            }
         }
     }
 }
