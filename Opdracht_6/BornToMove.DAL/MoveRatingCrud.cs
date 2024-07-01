@@ -31,7 +31,7 @@ namespace BornToMove.DAL
             context.SaveChanges();
         }
 
-        public double? readAvgMoveRatingByMoveId(int id)
+        public double? readAvgMoveRatingValueByMoveId(int id)
         {
             try
             {
@@ -44,9 +44,47 @@ namespace BornToMove.DAL
             }
         }
 
-        public MoveRating readMoveRating(int id)
+        //public MoveRating readMoveRating(int id)
+        //{
+        //    return context.MoveRating.Where(r => r.move.id == id).First();
+        //}
+
+        public List<MoveRating> readAllMoveAvgRatings()
         {
-            return context.MoveRating.Where(r => r.move.id == id).First();
+            List<Move> moves = (from m in context.Move
+                                select m).ToList();
+            List<MoveRating> avgRatings = new List<MoveRating>();
+
+            foreach (Move move in moves)
+            {
+                double? avg = readAvgMoveRatingValueByMoveId(move.id);
+
+                MoveRating mr = new MoveRating();
+                mr.id = 0;
+                mr.move = move;
+                mr.rating = (avg != null) ? (double)avg : 0.0;
+                mr.intensity = 1;
+
+                avgRatings.Add(mr);
+            }
+
+            return avgRatings;
+        }
+
+        public MoveRating readAvgMoveRatingByMoveId(int id)
+        {
+            double? avg = readAvgMoveRatingValueByMoveId(id);
+
+            MoveRating mr = new MoveRating();
+            mr.id = id;
+            mr.move = (from m in context.Move
+                       where m.id == id
+                       select m).ToList().First();
+            mr.rating = (avg != null) ? (double)avg : 0.0;
+            mr.intensity = 1;
+
+            return mr;
+
         }
     }
 }

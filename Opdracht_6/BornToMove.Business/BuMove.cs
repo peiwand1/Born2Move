@@ -30,9 +30,19 @@ namespace BornToMove.Business
             return moveCrud.readMoveById(id);
         }
 
-        public double? getAvgMoveRating(int id)
+        public List<MoveRating> getMovesWithAvgRating()
+        {
+            return moveRatingCrud.readAllMoveAvgRatings();
+        }
+
+        public MoveRating getMoveAndAvgRatingById(int id)
         {
             return moveRatingCrud.readAvgMoveRatingByMoveId(id);
+        }
+
+        public double? getAvgMoveRating(int id)
+        {
+            return moveRatingCrud.readAvgMoveRatingValueByMoveId(id);
         }
 
         public void addMove(Move move)

@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<MoveContext>(); // Dit zorgt dat MoveContext automatisch wordt geïnjecteerd daar waar een constructor hem gebruikt
 builder.Services.TryAddScoped<MoveCrud>(); // Dit zorgt dat MoveCrud automatisch wordt geïnjecteerd daar waar een constructor hem gebruikt
+builder.Services.TryAddScoped<MoveRatingCrud>();
 builder.Services.TryAddScoped<BuMove>(); // Dit zorgt dat BuMove automatisch wordt geïnjecteerd daar waar een constructor hem gebruikt
 
 // Add services to the container.
