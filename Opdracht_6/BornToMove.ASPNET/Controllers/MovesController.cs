@@ -37,5 +37,28 @@ namespace BornToMove.ASPNET
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult CreateMove([FromBody] Move move)
+        {
+            Console.WriteLine("test got into function CreateMove");
+            if (!ModelState.IsValid)
+            {
+                Console.WriteLine("data was invalid");
+                return BadRequest(ModelState);
+            }
+
+            Console.WriteLine("data: " + move.id + " " + move.name + " " + move.description + " " + move.sweatrate);
+
+            _buMove.addMove(move);
+            return CreatedAtAction("Create", new { Id = move.id }, move);
+        }
+
+        //[HttpPost]
+        //public IActionResult Rate(MoveRating rating) 
+        //{
+        //    // TODO
+        //    return Details(rating.move.id);
+        //}
     }
 }

@@ -45,9 +45,9 @@ namespace BornToMove.Business
             return moveRatingCrud.readAvgMoveRatingValueByMoveId(id);
         }
 
-        public void addMove(string name, string description, int sweatrate)
+        public void addMove(Move move)
         {
-            Move move = new Move(0, name, description, sweatrate);
+            //Move move = new Move(0, name, description, sweatrate);
             moveCrud.create(move);
         }
 
@@ -65,9 +65,27 @@ namespace BornToMove.Business
         {
             if (getMoves().Count() == 0)
             {
-                addMove("Push up", "Ga horizontaal liggen op teentoppen en handen. Laat het lijf langzaam zakken tot de neus de grond bijna raakt. Duw het lijf terug nu omhoog tot de ellebogen bijna gestrekt zijn. Vervolgens weer laten zakken. Doe dit 20 keer zonder tussenpauzes", 3);
-                addMove("Planking", "Ga horizontaal liggen op teentoppen en onderarmen. Houdt deze positie 1 minuut vast", 3);
-                addMove("Squat", "Ga staan met gestrekte armen. Zak door de knieën tot de billen de grond bijna raken. Ga weer volledig gestrekt staan. Herhaal dit 20 keer zonder tussenpauzes", 5);
+                //addMove("Push up", "Ga horizontaal liggen op teentoppen en handen. Laat het lijf langzaam zakken tot de neus de grond bijna raakt. Duw het lijf terug nu omhoog tot de ellebogen bijna gestrekt zijn. Vervolgens weer laten zakken. Doe dit 20 keer zonder tussenpauzes", 3);
+                //addMove("Planking", "Ga horizontaal liggen op teentoppen en onderarmen. Houdt deze positie 1 minuut vast", 3);
+                //addMove("Squat", "Ga staan met gestrekte armen. Zak door de knieën tot de billen de grond bijna raken. Ga weer volledig gestrekt staan. Herhaal dit 20 keer zonder tussenpauzes", 5);
+                Move move1 = new Move(0, "Push up", "Ga horizontaal liggen op teentoppen en handen. Laat het lijf langzaam zakken tot de neus de grond bijna raakt. Duw het lijf terug nu omhoog tot de ellebogen bijna gestrekt zijn. Vervolgens weer laten zakken. Doe dit 20 keer zonder tussenpauzes", 3);
+                Move move2 = new Move(0, "Planking", "Ga horizontaal liggen op teentoppen en onderarmen. Houdt deze positie 1 minuut vast", 3);
+                Move move3 = new Move(0, "Squat", "Ga staan met gestrekte armen. Zak door de knieën tot de billen de grond bijna raken. Ga weer volledig gestrekt staan. Herhaal dit 20 keer zonder tussenpauzes", 5);
+                addMove(move1);
+                addMove(move2);
+                addMove(move3);
+
+                MoveRating r1 = new MoveRating();
+                r1.move = move1;
+                r1.rating = 7;
+                r1.intensity = 1;
+                addMoveRating(r1);
+
+                MoveRating r2 = new MoveRating();
+                r2.move = move1;
+                r2.rating = 9;
+                r2.intensity = 1;
+                addMoveRating(r2);
             }
         }
     }
