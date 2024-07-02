@@ -1,0 +1,54 @@
+﻿@model BornToMove.DAL.MoveRating
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>MoveRating</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.move.id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.move.id)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.move.name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.move.name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.move.description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.move.description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.move.sweatrate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.move.sweatrate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.rating)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.rating)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.intensity)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.intensity)
+        </dd>
+    </dl>
+</div>
+<div>
+    <!--<a asp-action="Edit" asp-route-id="@Model?.id">Edit</a> |-->
+    <a asp-action="Index">Back to List</a>
+</div>

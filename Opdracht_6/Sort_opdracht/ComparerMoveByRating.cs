@@ -2,11 +2,11 @@
 
 namespace Sort_opdracht
 {
-    public class MoveComparer : IComparer<Move>
+    public class ComparerMoveByRating : IComparer<Move>
     {
         MoveContext context;
 
-        public MoveComparer(MoveContext aContext)
+        public ComparerMoveByRating(MoveContext aContext)
         {
             context = aContext;
         }

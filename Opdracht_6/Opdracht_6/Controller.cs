@@ -24,7 +24,7 @@ namespace BornToMove
             sorter = new RotateSort<Move>();
             buMove = aBuMove;
             idMode = IdMode.useListIndex;
-            comparer = new MoveComparer(context);
+            comparer = new ComparerMoveByRating(context);
             buMove.populateDB(); // adds some moves (if the db is empty)
         }
 
