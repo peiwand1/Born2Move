@@ -3,16 +3,13 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Get Schmooving</h1>
+    <p>Would you like to choose an exercise, or pick one at random?</p>
 </div>
 
 <form method="post" asp-area="" asp-controller="Moves" asp-action="Index">
-    <input id="btn1" type="submit" value="Get all moves" />
+    <input id="btn1" type="submit" value="Pick an exercise" />
 </form>
 <form method="post" asp-area="" asp-controller="Moves" asp-action="Random">
-    <input id="btn1" type="submit" value="Get random move" />
-</form>
-<form method="post" asp-area="" asp-controller="Moves" asp-action="Create">
-    <input id="btn1" type="submit" value="Add a move" />
+    <input id="btn1" type="submit" value="Get random" />
 </form>
