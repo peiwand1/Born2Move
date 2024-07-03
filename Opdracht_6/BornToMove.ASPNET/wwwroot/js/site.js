@@ -20,10 +20,9 @@ $(document).ready(function () {
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (result) {
-                //alert('Success');// handle success response
+                document.location.href = "/Moves";
             },
             error: function () {
-                //alert('Error');// handle error response
             }
         });
     });
