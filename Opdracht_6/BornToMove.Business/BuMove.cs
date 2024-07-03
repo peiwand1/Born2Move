@@ -45,10 +45,9 @@ namespace BornToMove.Business
             return moveRatingCrud.readAvgMoveRatingValueByMoveId(id);
         }
 
-        public void addMove(Move move)
+        public bool addMove(Move move)
         {
-            //Move move = new Move(0, name, description, sweatrate);
-            moveCrud.create(move);
+            return moveCrud.create(move);
         }
 
         public void addMoveRating(MoveRating moveRating)
@@ -59,6 +58,11 @@ namespace BornToMove.Business
         public void updateMove(Move move)
         {
             moveCrud.update(move);
+        }
+
+        public bool deleteMove(int moveId)
+        {
+            return moveCrud.delete(moveId);
         }
 
         public void populateDB()

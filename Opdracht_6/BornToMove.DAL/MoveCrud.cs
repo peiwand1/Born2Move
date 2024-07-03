@@ -13,25 +13,48 @@ namespace BornToMove.DAL
             context = aContext;
         }
 
-        public void create(Move move)
+        public bool create(Move move)
         {
-            context.Move.Add(move);
-            context.SaveChanges();
-        }
-
-        public void update(Move move)
-        {
-            context.Move.Update(move);
-            context.SaveChanges();
-        }
-
-        public void delete(int id)
-        {
-            Move? move = readMoveById(id);
-            if (move != null)
+            try
             {
+                context.Move.Add(move);
+                context.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool update(Move move)
+        {
+            try
+            {
+                context.Move.Update(move);
+                context.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool delete(int id)
+        {
+            try
+            {
+                Move? move = readMoveById(id);
+                if (move == null) return false;
+
                 context.Move.Remove(move);
                 context.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
             }
         }
 

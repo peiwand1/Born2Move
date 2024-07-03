@@ -56,5 +56,17 @@ namespace BornToMove.ASPNET
         //    // TODO
         //    return Details(rating.move.id);
         //}
+
+        // TODO figure out how to make this happen without opening a new (empty) page
+        public IActionResult DeleteMove(int? id)
+        {
+            if (id == null) return BadRequest();
+
+            if (_buMove.deleteMove((int)id))
+            {
+                return Ok();
+            }
+            return BadRequest();
+        }
     }
 }
