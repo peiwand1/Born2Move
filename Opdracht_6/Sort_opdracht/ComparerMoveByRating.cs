@@ -16,13 +16,26 @@ namespace Sort_opdracht
             if (x == null) return -1;
             if (y == null) return 1;
 
-            double? xAvg = context.MoveRating.Where(r => r.move.id == x.id)
-                                             .Average(r => r.rating);
-            double? yAvg = context.MoveRating.Where(r => r.move.id == y.id)
-                                             .Average(r => r.rating);
-            if (xAvg == null && yAvg == null) return 0;
-            if (xAvg == null) return -1;
-            if (yAvg == null) return 1;
+            double? xAvg;
+            double? yAvg;
+
+            try
+            {
+                xAvg = context.MoveRating.Where(r => r.move.id == x.id).Average(r => r.rating);
+            }
+            catch
+            {
+                return -1;
+            }
+
+            try
+            {
+                yAvg = context.MoveRating.Where(r => r.move.id == y.id).Average(r => r.rating);
+            }
+            catch
+            {
+                return 1;
+            }
 
             if (xAvg > yAvg) return 1;
             if (xAvg < yAvg) return -1;
