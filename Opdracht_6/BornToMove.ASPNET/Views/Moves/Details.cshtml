@@ -50,12 +50,14 @@
 </div>
 
 <div>
-    @using (Html.BeginForm(FormMethod.Get, new { action = "/Moves/Rate", id = "rate_form" }))
+    @using (Html.BeginForm(FormMethod.Post, new { action = "/Moves/Rate", id = "rate_form" }))
     {
         <label asp-for="rating" class="control-label"></label>
-        @Html.TextBoxFor(m => m.rating  , new { type = "number", min = "1", max = "10", @class = "form-control" })
+        @Html.TextBoxFor(model => model.rating, new { type = "number", min = "1", max = "10", @class = "form-control" })
+        @Html.TextBoxFor(model => model.move.id, new { hidden = "true" })
+        @Html.TextBoxFor(model => model.intensity, new { hidden = "true" })
+        <input type="submit" value="Rate" class="btn btn-primary" />
     }
-    TODO Add rating
 </div>
 
 <div>

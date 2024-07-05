@@ -50,14 +50,23 @@ namespace BornToMove.ASPNET
             return CreatedAtAction("Create", new { Id = move.id }, move);
         }
 
-        //[HttpPost]
-        //public IActionResult Rate(MoveRating rating) 
-        //{
-        //    // TODO
-        //    return Details(rating.move.id);
-        //}
+        [HttpPost]
+        public IActionResult Rate([FromBody] MoveRating moveRating)
+        {
+            Console.WriteLine("got in Rate");
+            if (!ModelState.IsValid)
+            {
+                Console.WriteLine(moveRating == null ? "was null" : "data invalid");
 
-        // TODO figure out how to make this happen without opening a new (empty) page
+                return BadRequest(ModelState);
+            }
+            Console.WriteLine("data is good");
+
+
+            _buMove.addMoveRating(moveRating);
+            return CreatedAtAction("Create", new { Id = moveRating.id }, moveRating);
+        }
+
         public IActionResult DeleteMove(int? id)
         {
             if (id == null) return BadRequest();
