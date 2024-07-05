@@ -31,14 +31,32 @@ $(document).ready(function () {
     $('#rate_form').on('click', '.btn', function (e) {
         e.preventDefault();
         var form = $('#rate_form');
-        var object = {};
+        var moverating = {};
+        var move = {};
+
         $.each(form.serializeArray(), function () {
-            object[this.name] = this.value;
+            if (this.name.startsWith("move.")) {
+                let temp = this.name.replace("move.", '')
+                move[temp] = this.value;
+            }
+            else {
+                moverating[this.name] = this.value;
+            }
         });
-        var json = JSON.stringify(object);
-        //json = json.replace("BornToMove.DAL.Move", "{id=5, name:\"asdg\", description: \"dsgasdgsdag\", sweatrate:4}");
-        json = json.replace("BornToMove.DAL.Move", "1");
+        moverating["move"] = move;
+        var json = JSON.stringify(moverating);
         alert(json);
+
+        // TODO fix error:
+        // alles lijkt te functioneren (rating wordt toegevoegd), maar ik krijg een grote error
+        //An unhandled exception has occurred while executing the request.
+        //    System.Text.Json.JsonException: A possible object cycle was detected.This can either be due to a cycle or if the object depth is larger than the maximum allowed depth of 32.
+        //    Consider using ReferenceHandler.Preserve on JsonSerializerOptions to support cycles.Path: $.move.ratings.move.ratings.move.ratings.move.ratings.move.ratings.move.ratings.move.ratings.move.ratings.move.ratings.move.ratings.move.id.
+        // at System.Text.Json.ThrowHelper.ThrowJsonException_SerializerCycleDetected(Int32 maxDepth)
+
+        //sample json:
+        //{ "rating": "4", "intensity": "4", "move": { "id": "8", "name": "sdga", "description": "gregre", "sweatrate": "7" } }
+
         $.ajax({
             type: form.attr('method'),
             url: form.attr('action'),
