@@ -61,7 +61,7 @@ namespace BornToMove.ASPNET
             moveRating.move = _buMove.getMove(moveRating.move.id);
 
             _buMove.addMoveRating(moveRating);
-            return CreatedAtAction("Create", 1);
+            return CreatedAtAction("Create", new { id = moveRating.id }, moveRating);
         }
 
         public IActionResult DeleteMove(int? id)
