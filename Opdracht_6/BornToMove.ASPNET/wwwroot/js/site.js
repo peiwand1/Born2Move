@@ -45,17 +45,7 @@ $(document).ready(function () {
         });
         moverating["move"] = move;
         var json = JSON.stringify(moverating);
-        alert(json);
-
-        // TODO fix error:
-        // alles lijkt te functioneren (rating wordt toegevoegd), maar ik krijg een grote error
-        //An unhandled exception has occurred while executing the request.
-        //    System.Text.Json.JsonException: A possible object cycle was detected.This can either be due to a cycle or if the object depth is larger than the maximum allowed depth of 32.
-        //    Consider using ReferenceHandler.Preserve on JsonSerializerOptions to support cycles.Path: $.move.ratings.move.ratings.move.ratings.move.ratings.move.ratings.move.ratings.move.ratings.move.ratings.move.ratings.move.ratings.move.id.
-        // at System.Text.Json.ThrowHelper.ThrowJsonException_SerializerCycleDetected(Int32 maxDepth)
-
-        //sample json:
-        //{ "rating": "4", "intensity": "4", "move": { "id": "8", "name": "sdga", "description": "gregre", "sweatrate": "7" } }
+        //alert(json);
 
         $.ajax({
             type: form.attr('method'),
@@ -64,11 +54,11 @@ $(document).ready(function () {
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (result) {
-                //document.location.href = "/Moves";
-                alert("suc");
+                document.location.href = "/Moves";
+                //alert("success");
             },
             error: function () {
-                alert("err");
+                alert("error");
             }
         });
     });

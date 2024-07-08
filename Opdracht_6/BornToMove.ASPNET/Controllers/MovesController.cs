@@ -53,21 +53,15 @@ namespace BornToMove.ASPNET
         [HttpPost]
         public IActionResult Rate([FromBody] MoveRating moveRating)
         {
-            //Console.WriteLine("got in Rate");
             if (!ModelState.IsValid)
             {
-                //Console.WriteLine(moveRating == null ? "was null" : "data invalid");
-
                 return BadRequest(ModelState);
             }
-            //Console.WriteLine("data is valid");
 
-            // this line is necessary because otherwise it considers the id to be manually set, which isn't allowed
-            // TODO find better way to solve?
             moveRating.move = _buMove.getMove(moveRating.move.id);
 
             _buMove.addMoveRating(moveRating);
-            return CreatedAtAction("Create", new { Id = moveRating.id }, moveRating);
+            return CreatedAtAction("Create", 1);
         }
 
         public IActionResult DeleteMove(int? id)
