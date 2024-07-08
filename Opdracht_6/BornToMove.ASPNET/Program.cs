@@ -12,6 +12,7 @@ builder.Services.TryAddScoped<BuMove>(); // Dit zorgt dat BuMove automatisch wor
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
 builder.Services.AddControllers().AddJsonOptions(options =>
    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
 
