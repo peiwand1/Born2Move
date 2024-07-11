@@ -15,4 +15,9 @@ public class Move
         this.description = description;
         this.sweatrate = sweatrate;
     }
+
+    public Move()
+    {
+
+    }
 }

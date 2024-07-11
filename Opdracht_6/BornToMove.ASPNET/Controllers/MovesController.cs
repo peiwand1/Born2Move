@@ -39,7 +39,8 @@ namespace BornToMove.ASPNET
         }
 
         [HttpPost]
-        public IActionResult CreateMove([FromBody] Move move)
+        [ValidateAntiForgeryToken]
+        public IActionResult CreateMove(Move move)
         {
             if (!ModelState.IsValid)
             {
@@ -47,11 +48,12 @@ namespace BornToMove.ASPNET
             }
 
             _buMove.addMove(move);
-            return CreatedAtAction("Create", new { Id = move.id }, move);
+            return RedirectToAction(nameof(Details), new { Id = move.id });
         }
 
         [HttpPost]
-        public IActionResult Rate([FromBody] MoveRating moveRating)
+        [ValidateAntiForgeryToken]
+        public IActionResult Rate(MoveRating moveRating)
         {
             if (!ModelState.IsValid)
             {
@@ -61,7 +63,7 @@ namespace BornToMove.ASPNET
             moveRating.move = _buMove.getMove(moveRating.move.id);
 
             _buMove.addMoveRating(moveRating);
-            return CreatedAtAction("Create", new { id = moveRating.id }, moveRating);
+            return RedirectToAction(nameof(Details), new { id = moveRating.move.id });
         }
 
         public IActionResult DeleteMove(int? id)
