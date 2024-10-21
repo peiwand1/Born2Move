@@ -1,12 +1,12 @@
 ﻿namespace Sort_opdracht
 {
-    public class RotateSort<T>
+    public class QuickSort<T>
     {
         private List<T> array;
         IComparer<T> comparer;
         Random rnd;
 
-        public RotateSort()
+        public QuickSort()
         {
             array = new List<T>();
             rnd = new Random();

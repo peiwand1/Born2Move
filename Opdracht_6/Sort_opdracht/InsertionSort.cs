@@ -1,10 +1,10 @@
 ﻿namespace Sort_opdracht
 {
-    internal class KeepListSorted
+    internal class InsertionSort
     {
         private List<int> array;
 
-        public KeepListSorted()
+        public InsertionSort()
         {
             array = new List<int>();
         }

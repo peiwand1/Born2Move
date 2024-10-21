@@ -1,10 +1,10 @@
 ﻿namespace Sort_opdracht
 {
-    internal class ShiftHighestSort
+    internal class BubbleSort
     {
         private List<int> array;
 
-        public ShiftHighestSort()
+        public BubbleSort()
         {
             array = new List<int>();
         }

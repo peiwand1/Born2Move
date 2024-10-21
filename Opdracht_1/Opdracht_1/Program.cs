@@ -20,9 +20,9 @@ namespace Sort_Opdracht
             // test each sorting algorithm x times and print time taken
             Stopwatch stopWatch = new Stopwatch();
             int testAmount = 100;
-            ShiftHighestSort shiftHighestSort = new ShiftHighestSort();
-            KeepListSorted keepListSorted = new KeepListSorted();
-            RotateSort rotateSort = new RotateSort();
+            BubbleSort shiftHighestSort = new BubbleSort();
+            InsertionSort keepListSorted = new InsertionSort();
+            QuickSort rotateSort = new QuickSort();
 
             ////////////////////////////////////////////////////////////////////////////////////////
             for (int i = 0; i < testAmount; i++)

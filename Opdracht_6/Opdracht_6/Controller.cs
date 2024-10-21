@@ -14,14 +14,14 @@ namespace BornToMove
 
     internal class Controller
     {
-        private RotateSort<Move> sorter;
+        private QuickSort<Move> sorter;
         private IComparer<Move> comparer;
         private BuMove buMove;
         private IdMode idMode;
 
         public Controller(BuMove aBuMove, MoveContext context)
         {
-            sorter = new RotateSort<Move>();
+            sorter = new QuickSort<Move>();
             buMove = aBuMove;
             idMode = IdMode.useListIndex;
             comparer = new ComparerMoveByRating(context);

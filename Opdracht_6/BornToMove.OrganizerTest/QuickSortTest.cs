@@ -4,7 +4,7 @@ using Sort_opdracht;
 // run tests with 'dotnet test'
 namespace BornToMove.OrganizerTest
 {
-    public class RotateSortTest
+    public class QuickSortTest
     {
         IntComparer comparer = new IntComparer();
 
@@ -12,7 +12,7 @@ namespace BornToMove.OrganizerTest
         public void testSortEmpty()
         {
             // prepare
-            RotateSort<int> sorter = new RotateSort<int>();
+            QuickSort<int> sorter = new QuickSort<int>();
             List<int> input = new List<int>() { };
 
             // run
@@ -30,7 +30,7 @@ namespace BornToMove.OrganizerTest
         public void testSortOneElement()
         {
             // prepare
-            RotateSort<int> sorter = new RotateSort<int>();
+            QuickSort<int> sorter = new QuickSort<int>();
             List<int> input = new List<int>() { 32 };
 
             // run
@@ -48,7 +48,7 @@ namespace BornToMove.OrganizerTest
         public void testSortTwoElements()
         {
             // prepare
-            RotateSort<int> sorter = new RotateSort<int>();
+            QuickSort<int> sorter = new QuickSort<int>();
             List<int> input = new List<int>() { 32, 3 };
 
             // run
@@ -66,7 +66,7 @@ namespace BornToMove.OrganizerTest
         public void testSortThreeElements()
         {
             // prepare
-            RotateSort<int> sorter = new RotateSort<int>();
+            QuickSort<int> sorter = new QuickSort<int>();
             List<int> input = new List<int>() { 32, 3, 235 };
 
             // run
@@ -84,7 +84,7 @@ namespace BornToMove.OrganizerTest
         public void testSortThreeEqual()
         {
             // prepare
-            RotateSort<int> sorter = new RotateSort<int>();
+            QuickSort<int> sorter = new QuickSort<int>();
             List<int> input = new List<int>() { 3, 3, 3 };
 
             // run
@@ -102,7 +102,7 @@ namespace BornToMove.OrganizerTest
         public void testSortSevenElements()
         {
             // prepare
-            RotateSort<int> sorter = new RotateSort<int>();
+            QuickSort<int> sorter = new QuickSort<int>();
             List<int> input = new List<int>() { 32, 3, 235, 32, 32, 54, 22 };
 
             // run
